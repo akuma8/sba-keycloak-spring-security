@@ -1,0 +1,40 @@
+spring:
+  main:
+    banner-mode: 'off'
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-name: Keycloak
+            client-id: ${spring.application.name}
+            client-secret: ${keycloak.credentials.secret}
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://localhost:8086/login/oauth2/code/keycloak"
+            scope:
+              - profile
+        provider:
+          keycloak:
+            authorization-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
+            user-name-attribute: preferred_username
+
+#These properties are only use for the Keycloak Admin Client
+keycloak:
+  auth-server-url: "http://localhost:8180/auth"
+  realm: "sba"
+  resource: ${spring.application.name}
+  credentials:
+    secret: "a71f4376-b1b8-4e4e-a332-1525196b84dd"
+  use-resource-role-mappings: true
+  ssl-required: 'none'
+  principal-attribute: preferred_username
+
+logging:
+  level:
+    web: debug
+    org:
+      springframework:
+        security: debug

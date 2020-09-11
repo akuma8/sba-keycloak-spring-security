@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    kubernetes:
+      enabled: false
+      loadbalancer:
+        enabled: false
+server:
+  port: 8086
