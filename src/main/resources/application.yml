@@ -15,6 +15,7 @@ spring:
               - profile
         provider:
           keycloak:
+            issuer-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}
             authorization-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/auth
             token-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/token
             user-info-uri: ${keycloak.auth-server-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
